@@ -138,7 +138,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
     
-    ServiceController *detailViewController = [[ServiceController alloc] initWithNibName:@"ServiceCOntroller" bundle:nil];
+    ServiceController *detailViewController = [[ServiceController alloc] initWithNibName:@"ServiceController" bundle:nil];
     detailViewController.title = @"Confirmar Servicio";
 	
 	

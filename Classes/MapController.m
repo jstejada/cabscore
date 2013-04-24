@@ -69,7 +69,7 @@
 // <MKMapViewDelegate>
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
-	//MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
+	//MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 5000, 5000);
     //[self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
 	[self updateMapAnnotations];
 }
@@ -87,7 +87,7 @@
 		annView.image = [ UIImage imageNamed:@"map_hole.png" ];
 	else if ([[annotation title] isEqualToString:@"Servicio"]){
 		annView.image = [ UIImage imageNamed:@"map_user.png" ];
-		UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];   
+		UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
 		[infoButton addTarget:self action:@selector(showDetailsView) forControlEvents:UIControlEventTouchUpInside];
 		annView.rightCalloutAccessoryView = infoButton;
 	}
@@ -96,12 +96,15 @@
 }
 
 - (IBAction) updateMapAnnotations {
-	//id userLocation = [self.mapView userLocation];
-    //[mapView removeAnnotations:[self.mapView annotations]];
+    id userLocation = [mapView userLocation];
+    NSMutableArray *pins = [[NSMutableArray alloc] initWithArray:[mapView annotations]];
+    if ( userLocation != nil ) {
+        [pins removeObject:userLocation]; // avoid removing user location off the map
+    }
 	
-    //if ( userLocation != nil ) {
-    //    [self.mapView addAnnotation:userLocation]; // will cause user location pin to blink
-    //}
+    [mapView removeAnnotations:pins];
+    [pins release];
+    pins = nil;
 	
 	NSURL *url = [NSURL URLWithString:@"http://frozen-atoll-4191.herokuapp.com/map_objects.json"];
 	ASIHTTPRequest *request1 = [ASIHTTPRequest requestWithURL:url];
@@ -136,8 +139,7 @@
 				latitude.floatValue, longitude.floatValue
 			};
 			point.coordinate = coord;
-			
-			point.title = @"Info!";
+			point.title = @"Información de Mapa";
 			point.subtitle = [NSString stringWithFormat:@"%@", [obj objectForKey:@"category"]];
 			[self.mapView addAnnotation:point];
 		} else {
@@ -167,7 +169,7 @@
 }
 
 - (void)showDetailsView {
-	ServiceController *detailViewController = [[ServiceController alloc] initWithNibName:@"ServiceCOntroller" bundle:nil];
+	ServiceController *detailViewController = [[ServiceController alloc] initWithNibName:@"ServiceController" bundle:nil];
     detailViewController.title = @"Confirmar Servicio";
 	
     // Pass the selected object to the new view controller.

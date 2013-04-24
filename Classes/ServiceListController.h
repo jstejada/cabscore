@@ -13,4 +13,5 @@
 @property (nonatomic, retain) NSMutableArray * services;
 
 - (void) updateServices;
+- (void) updateAndReload;
 @end

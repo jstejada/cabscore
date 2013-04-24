@@ -10,7 +10,7 @@
 
 
 @interface PanicController : UIViewController {
-
+	IBOutlet UIButton *panicButton;
 }
-
+- (IBAction) sendPanic;
 @end

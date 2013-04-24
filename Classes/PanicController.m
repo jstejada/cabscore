@@ -55,5 +55,17 @@
     [super dealloc];
 }
 
+- (IBAction) sendPanic {
+	
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Pánico!" 
+													message:@"La alerta de pánico ha sido enviada a las autoridades" 
+												   delegate:nil 
+										  cancelButtonTitle:@"OK"
+										  otherButtonTitles:nil];
+	[alert show];
+	[alert release];
+	
+}
+
 
 @end

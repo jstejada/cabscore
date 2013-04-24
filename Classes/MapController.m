@@ -35,7 +35,10 @@
 	self.mapView.delegate = self;
 }
 
-
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+	[self updateMapAnnotations];
+}
 /*
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -66,9 +69,8 @@
 // <MKMapViewDelegate>
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
-    [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
-	
+	//MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
+    //[self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
 	[self updateMapAnnotations];
 }
 
@@ -89,13 +91,17 @@
 		[infoButton addTarget:self action:@selector(showDetailsView) forControlEvents:UIControlEventTouchUpInside];
 		annView.rightCalloutAccessoryView = infoButton;
 	}
-		
-	
     annView.canShowCallout = YES;
     return [annView autorelease];
 }
 
 - (IBAction) updateMapAnnotations {
+	//id userLocation = [self.mapView userLocation];
+    //[mapView removeAnnotations:[self.mapView annotations]];
+	
+    //if ( userLocation != nil ) {
+    //    [self.mapView addAnnotation:userLocation]; // will cause user location pin to blink
+    //}
 	
 	NSURL *url = [NSURL URLWithString:@"http://frozen-atoll-4191.herokuapp.com/map_objects.json"];
 	ASIHTTPRequest *request1 = [ASIHTTPRequest requestWithURL:url];

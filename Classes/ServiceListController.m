@@ -23,15 +23,18 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     //self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	[self updateServices];
-	
+	[NSTimer scheduledTimerWithTimeInterval:60.0
+									 target:self
+								   selector:@selector(updateAndReload)
+								   userInfo:nil
+									repeats:YES];
 }
 
 
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-	[self updateServices];
-	[self.tableView reloadData];
+	[self updateAndReload];
 }
 
 /*
@@ -138,7 +141,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
     
-    ServiceController *detailViewController = [[ServiceController alloc] initWithNibName:@"ServiceCOntroller" bundle:nil];
+    ServiceController *detailViewController = [[ServiceController alloc] initWithNibName:@"ServiceController" bundle:nil];
     detailViewController.title = @"Confirmar Servicio";
 	
 	
@@ -193,6 +196,12 @@
 	} else {
 		NSLog(@"%@",error);
 	}
+	
+}
+
+- (void) updateAndReload {
+	[self updateServices];
+	[self.tableView reloadData];
 	
 }
 

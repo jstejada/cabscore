@@ -414,6 +414,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CabScore_Prefix.pch;
 				INFOPLIST_FILE = "CabScore-Info.plist";
+				OTHER_CODE_SIGN_FLAGS = "-gta";
 				PRODUCT_NAME = CabScore;
 			};
 			name = Debug;
@@ -430,6 +431,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CabScore_Prefix.pch;
 				INFOPLIST_FILE = "CabScore-Info.plist";
+				OTHER_CODE_SIGN_FLAGS = "-gta";
 				PRODUCT_NAME = CabScore;
 				VALIDATE_PRODUCT = YES;
 			};

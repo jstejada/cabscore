@@ -167,7 +167,7 @@
 }
 
 - (void)showDetailsView {
-	ServiceController *detailViewController = [[ServiceController alloc] initWithNibName:@"ServiceCOntroller" bundle:nil];
+	ServiceController *detailViewController = [[ServiceController alloc] initWithNibName:@"ServiceController" bundle:nil];
     detailViewController.title = @"Confirmar Servicio";
 	
     // Pass the selected object to the new view controller.
